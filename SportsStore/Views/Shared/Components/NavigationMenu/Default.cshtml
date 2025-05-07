@@ -1,21 +1,41 @@
 ﻿@model IEnumerable<string>
+    <style>
+        .navy-button {
+            border-color: #001f3f;
+            color: #001f3f;
+        }
 
-<div class="d-grid gap-2 mb-4">
-    <a class="btn btn-outline-primary @(ViewBag.SelectedCategory == null ? "active" : "")"
-       asp-action="List"
-       asp-controller="Product"
-       asp-route-category="">
-        Home
-    </a>
+            .navy-button:hover {
+                background-color: #001f3f;
+                color: white;
+            }
 
-    @foreach (string category in Model)
+            .navy-button.active,
+            .navy-button:focus.active {
+                background-color: #001f3f;
+                color: white;
+                border-color: #001f3f;
+            }
+    </style>
+ 
+
+        <div class="d-grid gap-2 mb-4">
+            <a class="btn navy-button @(ViewBag.SelectedCategory == null ? "active" : "")"
+               asp-action="List"
+               asp-controller="Product"
+               asp-route-category="">
+                Home
+            </a>
+
+            @foreach (string category in Model)
     {
-        <a class="btn btn-outline-primary @(category == ViewBag.SelectedCategory ? "active" : "")"
-           asp-action="List"
-           asp-controller="Product"
-           asp-route-category="@category"
-           asp-route-productPage="1">
-            @category
-        </a>
+            <a class="btn navy-button @(category == ViewBag.SelectedCategory ? "active" : "")"
+               asp-action="List"
+               asp-controller="Product"
+               asp-route-category="@category"
+               asp-route-productPage="1">
+                @category
+            </a>
     }
-</div>
+        </div>
+
