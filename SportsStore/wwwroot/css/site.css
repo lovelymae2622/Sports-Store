@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+.product-image-container {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+}
+
+#categories .btn {
+    text-align: left;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+    #categories .btn:hover {
+        transform: translateX(5px);
+        background-color: #f0f8ff;
+    }
+
+    #categories .btn.active {
+        font-weight: bold;
+        background-color: #007bff;
+        color: white;
+    }
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn-group .btn {
+    margin-right: 2px;
+}
+
+@media (max-width: 768px) {
+    #categories {
+        margin-bottom: 20px;
+    }
+
+    .row.m-1 {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .row.m-1 > div {
+            width: 100%;
+        }
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+.navbar-text .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge {
+    padding: 0.25em 0.6em;
+    font-size: 75%;
+}

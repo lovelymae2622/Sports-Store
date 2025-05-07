@@ -1,0 +1,72 @@
+﻿@model CartIndexViewModel
+
+<div class="container">
+    <h2 class="mb-4">Your Cart</h2>
+
+    @if (TempData["CartDebug"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["CartDebug"]
+        </div>
+    }
+
+    @if (Model.Cart.Lines.Count() > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Item</th>
+                        <th class="text-end">Price</th>
+                        <th class="text-end">Subtotal</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Cart.Lines)
+                    {
+                        <tr>
+                            <td>
+                                <form asp-action="UpdateCart" method="post">
+                                    <input type="hidden" name="productId" value="@line.Product.ProductID" />
+                                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                                    <div class="input-group">
+                                        <input type="number" name="quantity" value="@line.Quantity" min="1" class="form-control form-control-sm" style="max-width: 70px;" />
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>@line.Product.Name</td>
+                            <td class="text-end">₱@line.Product.Price.ToString("N2")</td>
+                            <td class="text-end">₱@((line.Quantity * line.Product.Price).ToString("N2"))</td>
+                            <td>
+                                <form asp-action="RemoveFromCart" method="post">
+                                    <input type="hidden" name="productId" value="@line.Product.ProductID" />
+                                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end">Total:</td>
+                        <td class="text-end"><strong>₱@Model.Cart.ComputeTotalValue().ToString("N2")</strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+            <a class="btn btn-success" asp-action="Checkout" asp-controller="Order">Checkout</a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">Your cart is empty. <a href="@Model.ReturnUrl">Continue Shopping</a></div>
+    }
+</div>
